@@ -1,11 +1,14 @@
 '''
-Created tests for:
-Valid and invalid word pyramids
-Capital letters included in string input
-Emoji / Unicode characters are treated as part of the word
-Integers as input
-Spaces and hyphens included in string input
-Length of string input
+Tests include:
+- What Counter will return for:
+    - Valid word pyramid
+    - Invalid word pyramid
+    - Hyphen included in string input
+    - Space included in string input
+    - Capital letters included in string input
+    - Emoji / Unicode characters included in string input
+    - Integers included in string input
+    - Length of string input
 '''
 
 import pytest
@@ -57,44 +60,44 @@ class TestAlgorithm:
 
 
 class TestAPI:
-    # use pytest-flask to specify an app fixture and send API requests with the app
-    # create a fixture app()to create Flask server
+    # Use pytest-flask to specify an app fixture and send API requests with the app.
+    # Create a fixture - app() - to create Flask server.
     @pytest.fixture
     def app(self):
         app = create_app()
         return app
 
-    # Create a test client
+    # Create a test client.
     @pytest.fixture
     def client(self, app):
         client = app.test_client()
         return client
 
     def test_valid(self, client):
-        # Send a GET request with input string
+        # Send a GET request with input string.
         response = client.get('/banana')
-        # Check status code returned from server is 200 (OK)
+        # Check status code returned from server is 200 (OK).
         assert response.status_code == 200
-        # TODO: Check that json returned is in correct format; is_valid_word_pyramid function should return True
+        # Check that json returned is in correct format; is_valid_word_pyramid function should return True.
         assert response.json == {
             'word': 'banana',
-            'isValid': True
+            'isValidPyramid': True
         }
 
     def test_invalid(self, client):
         response = client.get('/bandana')
         assert response.status_code == 200
-        # TODO: Check that json returned is in correct format; is_valid_word_pyramid function should return False
+        # Check that json returned is in correct format; is_valid_word_pyramid function should return False.
         assert response.json == {
             'word': 'bandana',
-            'isValid': False
+            'isValidPyramid': False
         }
 
     def test_invalid_string_length(self, client):
         longest_word_english = 'pneumonoultramicroscopicsilicovolcanoconiosis'
-        # Send GET request with string input that is longer than 45 chars
+        # Send GET request with string input that is greater than 45 chars.
         response = client.get(f"/{longest_word_english}_invalid")
-        # Check that status code returned is 400 bad request
+        # Check that status code returned is 400 bad request.
         assert response.status_code == 400
-        # TODO: This checks the error message (use byte string)
-        assert response.data == b'Your word must be less than 45 characters, but was 53'
+        # Checks the error message (need to decode from byte string to ASCII).
+        assert response.data.decode('ASCII') == 'Your word must be less than 45 characters, but was 53'

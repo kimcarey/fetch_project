@@ -1,7 +1,7 @@
 FROM python:3.7
 WORKDIR /usr/src/app
 
-# ensure local python is preferred over distribution python
+# ensure local python is preferred over distribution python.
 ENV PATH /usr/local/bin:$PATH
 
 # Install pipenv so that we can use it to install the dependencies.

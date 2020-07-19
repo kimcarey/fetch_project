@@ -16,7 +16,9 @@ Running w/ Docker
 `docker build -t fetch_rewards .`
 
 ### Run the docker image
-`docker run -p 5000:5000 fetch_rewards`
+`docker run -p 5000:5000 fetch_rewards`  
+Example 1: http://localhost:5000/banana  
+Example 2: http://localhost:5000/bandana
 
 ### Run the tests
 `docker run fetch_rewards python -m pytest tests/test_pyramid.py`
