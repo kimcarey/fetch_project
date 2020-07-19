@@ -97,4 +97,4 @@ def is_valid_word_pyramid(pyramid:Counter) -> bool:
 
 if __name__ == '__main__':
     app = create_app()
-    app.run()
+    app.run('0.0.0.0', port=5000)
