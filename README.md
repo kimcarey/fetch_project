@@ -1,17 +1,22 @@
 Word Pyramid Exercise
 ============
 
-Installing
----------
+Dependencies
+---
 
-1. Clone the repo
-2. Install [pipenv](https://pipenv.pypa.io/en/latest/#install-pipenv-today)
-3. Make sure you have Python 3.7 installed 
-4. Run this command in the root: `pipenv install --dev`
+### Docker
+If you don't have docker installed, you can use pipenv.
+See Dockerfile for details on installing and setting up
+a pipenv environment.
 
-Running
+Running w/ Docker
 ----
 
-### 
-1. Run app
-2. 
+### Build the docker image
+`docker build -t fetch_rewards .`
+
+### Run the docker image
+`docker run -p 5000:5000 fetch_rewards`
+
+### Run the tests
+`docker run fetch_rewards python -m pytest tests/test_pyramid.py`
